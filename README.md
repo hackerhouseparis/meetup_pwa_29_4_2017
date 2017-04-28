@@ -344,7 +344,7 @@ Puis lancer ces commandes :
 ```
 npm install -g firebase-tools
 firebase login
-firebase init // seulement sélectionner hosting et le repertoire et 'build'
+firebase init // seulement sélectionner hosting et le repertoire est 'build'
 npm run build && firebase deploy
 ```
 
