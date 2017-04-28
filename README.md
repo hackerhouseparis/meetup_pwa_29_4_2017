@@ -333,3 +333,21 @@ et modifier `src/index.html` pour lier le manifeste :
 ```
 
 Maintenant, on peut voir le score de 81/100 sur Lighthouse.
+
+Etape 5 : déployer sur Firebase
+-------------------------------
+
+Activer le cache dans `src/service-worker.js` : `var doCache = true;`
+
+Puis lancer ces commandes :
+
+```
+npm install -g firebase-tools
+firebase login
+firebase init // seulement sélectionner hosting et le repertoire et 'build'
+npm run build && firebase deploy
+```
+
+Si le score est de 100/100 vous respecter la norme PWA.
+
+C'est tout!
