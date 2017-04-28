@@ -210,3 +210,126 @@ Maintenant réaliser un nouveau rapport de Lighthouse pour voir un score de
 
 Etape 3 : améliorer notre progressive app
 -----------------------------------------
+
+Dans cette partie nous voulons pouvoir charger du `html` avant même que `react`
+ne les charge pour avoir du preloading.
+
+Dans `src/index.html` :
+
+```
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <title>React App</title>
+    <!-- Add in some basic styles for our HTML -->
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+      }
+
+      .App {
+        text-align: center;
+      }
+
+      .App-header {
+        background-color: #222;
+        height: 150px;
+        padding: 20px;
+        color: white;
+      }
+
+      .App-intro {
+        font-size: large;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Filler HTML as our app starts up -->
+    <div id="root">
+      <div class="App">
+      <div class="App-header">
+        <h2>Home</h2>
+      </div>
+      <p class="App-intro">
+        Loading site...
+      </p>
+    </div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+          }).catch(function(err) {
+            console.log(err)
+          });
+        });
+      } else {
+        console.log('service worker is not supported');
+      }
+    </script>
+  </body>
+</html>
+```
+
+Vérifier le score de 46/100 sur Lighthouse.
+
+Etape 4 : ajouter le manifeste
+------------------------------
+
+Le manifeste sert à pouvoir accéder à l'application directement via une icone
+sur son smartphone.
+
+Pour cela, il faut ajouter le fichier `public/manifest.json` à la racine du répertoire
+avec ce code :
+
+```
+{
+  "short_name": "My First PWA",
+  "name": "My First Progressive Web App",
+  "icons": [
+    {
+      "src":"icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/?utm_source=homescreen",
+  "background_color": "#222",
+  "theme_color": "#222",
+  "display": "standalone"
+}
+```
+
+et ajouter l'icone `public/icon.png` :
+
+![icon.png](https://cdn-images-1.medium.com/max/1600/1*W9RHL8akNvH-FUGwQgCUNw.png)
+
+et modifier `src/index.html` pour lier le manifeste :
+
+```
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <!-- Add manifest -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <!-- Tell the browser it's a PWA -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- Tell iOS it's a PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- Make sure theme-color is defined -->
+  <meta name="theme-color" content="#536878">
+  <title>React App</title>
+</head>
+```
+
+Maintenant, on peut voir le score de 81/100 sur Lighthouse.
