@@ -73,8 +73,8 @@ class App extends Component {
 
 export default App;
 ```
-
-Maintenant, tester l'application avec `yarn start`.
+Installer les packages avec `npm install`.
+Maintenant, tester l'application avec `npm start`.
 
 Etape 1 : installer Lighthouse
 ------------------------------
