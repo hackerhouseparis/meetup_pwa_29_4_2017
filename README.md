@@ -350,4 +350,6 @@ npm run build && firebase deploy
 
 Si le score est de 100/100 vous respecter la norme PWA.
 
+Si vous avez l'erreur `insecure request found`, c'est peut-être à cause des plugins chrome qui sont éxécutés en local. Désactivez les pour atteindre les 100/100
+
 C'est tout!
