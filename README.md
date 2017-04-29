@@ -214,7 +214,7 @@ Etape 3 : préchargement de notre progressive app
 Dans cette partie nous voulons pouvoir charger du `html` avant même que `react`
 ne les charge pour avoir du preloading.
 
-Dans `src/index.html` :
+Dans `public/index.html` :
 
 ```
 <!doctype html>
